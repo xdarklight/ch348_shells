@@ -1,6 +1,6 @@
 // PARAMETERS
-pcb_length = 70;
-pcb_width = 50;
+pcb_length = 68.5;
+pcb_width = 49.5;
 pcb_height = 2;
 usb_c_width = 8.9;
 usb_c_height = 3.3;
@@ -8,7 +8,6 @@ usb_c_margin_w = 2;
 usb_c_margin_h = 2;
 serial_height = 6;
 clearance = 0.5;
-serial_clearance = clearance;
 wall = 2;
 
 // CLIP PARAMETERS
@@ -20,11 +19,11 @@ clips_per_side = 2;
 
 // Cutout parameters
 roof_cutout1_size = 15;
-roof_cutout1_offset_x = wall + 10;
+roof_cutout1_offset_x = wall + 15;
 roof_cutout1_offset_y = (pcb_width + 2*clearance + 2*wall - roof_cutout1_size) / 2;
-roof_cutout2_x = 10;
-roof_cutout2_y = 30;
-roof_cutout2_offset_x = (pcb_length + 2*clearance + 2*wall) - wall - 8 - roof_cutout2_x;
+roof_cutout2_x = 15;
+roof_cutout2_y = 20;
+roof_cutout2_offset_x = (pcb_length + 2*clearance + 2*wall) - wall - 3 - roof_cutout2_x;
 roof_cutout2_offset_y = (pcb_width + 2*clearance + 2*wall - roof_cutout2_y) / 2;
 
 usb_c_cutout_width = usb_c_width + 2*usb_c_margin_w;
@@ -33,7 +32,7 @@ usb_c_cutout_height = usb_c_height + 2*usb_c_margin_h;
 // Enclosure dimensions
 inner_length = pcb_length + 2*clearance;
 inner_width  = pcb_width  + 2*clearance;
-inner_height = pcb_height + serial_height + serial_clearance;
+inner_height = (pcb_height - wall) + serial_height + clearance;
 outer_length = inner_length + 2*wall;
 outer_width  = inner_width  + 2*wall;
 outer_height = inner_height + wall*2;
@@ -42,7 +41,7 @@ outer_height = inner_height + wall*2;
 usb_c_y_min = (outer_width / 2) - (usb_c_cutout_width / 2);
 usb_c_y_max = (outer_width / 2) + (usb_c_cutout_width / 2);
 
-text_size = wall;
+text_size = 4;
 text_depth = wall / 2;
 
 // Function for safe clip positions, avoids USB port
@@ -113,77 +112,66 @@ module shell() {
         translate([wall, outer_width - wall, wall])
             cube([inner_length, wall + 0.1, inner_height]);
 
-        translate([wall + (16 * 1), wall + text_size, outer_height - wall + text_depth])
+        translate([wall + text_size, inner_width / 2, outer_height - wall + text_depth])
+            rotate([0,0,90])
             linear_extrude(text_depth)
-                text("A|VRTG", size = text_size, halign = "right", valign = "center");
+                text(".CON: .VRTG", size = text_size, halign = "center", valign = "center");
 
-        translate([wall + (16 * 2), wall + text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 1), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text("B|VRTG", size = text_size, halign = "right", valign = "center");
+                text(".A", size = text_size, halign = "right", valign = "center");
 
-        translate([wall + (16 * 3), wall + text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 2), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text("C|VRTG", size = text_size, halign = "right", valign = "center");
+                text(".B", size = text_size, halign = "right", valign = "center");
 
-        translate([wall + (16 * 4), wall + text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 3), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text("D|VRTG", size = text_size, halign = "right", valign = "center");
+                text(".C", size = text_size, halign = "right", valign = "center");
 
-        translate([wall + (16 * 4), outer_width - wall - text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 4), wall + text_size, outer_height - wall + text_depth])
+            linear_extrude(text_depth)
+                text(".D", size = text_size, halign = "right", valign = "center");
+
+        translate([wall + (15 * 4), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text("E|VRTG", size = text_size, halign = "left", valign = "center");
+                text(".E", size = text_size, halign = "left", valign = "center");
 
-        translate([wall + (16 * 3), outer_width - wall - text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 3), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text("F|VRTG", size = text_size, halign = "left", valign = "center");
+                text(".F", size = text_size, halign = "left", valign = "center");
 
-        translate([wall + (16 * 2), outer_width - wall - text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 2), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text("G|VRTG", size = text_size, halign = "left", valign = "center");
+                text(".G", size = text_size, halign = "left", valign = "center");
 
-        translate([wall + (16 * 1), outer_width - wall - text_size, outer_height - wall + text_depth])
+        translate([wall + (15 * 1), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text("H|VRTG", size = text_size, halign = "left", valign = "center");
+                text(".H", size = text_size, halign = "left", valign = "center");
 
         // USB-C cutout extending to floor
         translate([0, outer_width / 2 - usb_c_cutout_width / 2, 0])
-            cube([wall + 0.1, usb_c_cutout_width, usb_c_cutout_height + wall]);
+            cube([wall + 0.1, usb_c_cutout_width, usb_c_cutout_height]);
 
         // Roof (top) cutout 1
         translate([roof_cutout1_offset_x, roof_cutout1_offset_y, outer_height - wall])
             cube([roof_cutout1_size, roof_cutout1_size, wall + 0.1]);
 
-        translate([roof_cutout1_offset_x + (roof_cutout1_size / 2), roof_cutout1_offset_y + roof_cutout1_size + text_size, outer_height - wall + text_depth])
-            linear_extrude(text_depth)
-                text("5V", size = text_size, halign = "center", valign = "center");
-
-        translate([roof_cutout1_offset_x + (roof_cutout1_size / 2), roof_cutout1_offset_y - text_size, outer_height - wall + text_depth])
-            linear_extrude(text_depth)
-                text("3.3V", size = text_size, halign = "center", valign = "center");
-
-        translate([roof_cutout1_offset_x + roof_cutout1_size + text_size, roof_cutout1_offset_y + (roof_cutout1_size / 2) + 3, outer_height - wall + text_depth])
+        translate([roof_cutout1_offset_x + roof_cutout1_size + (text_size / 2), roof_cutout1_offset_y + (roof_cutout1_size / 2) + 3, outer_height - wall + text_depth])
             linear_extrude(text_depth)
                 text("PWR", size = text_size, halign = "left", valign = "center");
 
-        translate([roof_cutout1_offset_x + roof_cutout1_size + text_size, roof_cutout1_offset_y + (roof_cutout1_size / 2) - 3, outer_height - wall + text_depth])
+        translate([roof_cutout1_offset_x + roof_cutout1_size + (text_size / 2), roof_cutout1_offset_y + (roof_cutout1_size / 2) - 3, outer_height - wall + text_depth])
             linear_extrude(text_depth)
                 text("ACT", size = text_size, halign = "left", valign = "center");
 
         // Roof (top) cutout 2 (1x3cm)
         translate([roof_cutout2_offset_x, roof_cutout2_offset_y, outer_height - wall])
             cube([roof_cutout2_x, roof_cutout2_y, wall + 0.1]);
-
-        translate([roof_cutout2_offset_x + roof_cutout2_x + text_size, roof_cutout2_offset_y + (roof_cutout2_y / 2) + text_size, outer_height - wall + text_depth])
-            linear_extrude(text_depth)
-                text("TX", size = text_size, halign = "left", valign = "center");
-
-        translate([roof_cutout2_offset_x + roof_cutout2_x + text_size  + text_size, roof_cutout2_offset_y + (roof_cutout2_y / 2) - text_size, outer_height - wall + text_depth])
-            linear_extrude(text_depth)
-                text("RX", size = text_size, halign = "center", valign = "center");
     }
 }
 
@@ -200,25 +188,25 @@ module floor() {
         translate([0, usb_c_y_min, 0])
             cube([wall + 0.1, usb_c_cutout_width, wall + 0.1]);
 
-        translate([outer_length / 2, (outer_width / 2) + (6 * text_size), wall - text_depth])
+        translate([outer_length / 2, (outer_width / 2) + (5 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("XB0201348 Version: 4       XB_250312_0075", size = text_size, halign = "center", valign = "center");
+                text("XB0201348 Version: 4", size = text_size, halign = "center", valign = "center");
 
-        translate([outer_length / 2, (outer_width / 2) + (4 * text_size), wall - text_depth])
+        translate([outer_length / 2, (outer_width / 2) + (3 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("USB -> 8_3V3/5V TTL", size = text_size, halign = "center", valign = "center");
+                text("XB_250312_0075", size = text_size, halign = "center", valign = "center");
 
-        translate([outer_length / 2, (outer_width / 2) + (0 * text_size), wall - text_depth])
+        translate([outer_length / 2, (outer_width / 2) + (1 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("3.3V -> VCC: 3.3V; RX, TX: 3.3V", size = text_size, halign = "center", valign = "center");
+                text("VCC: 3.3V; RX, TX: 3.3V", size = text_size, halign = "center", valign = "center");
 
-        translate([outer_length / 2, (outer_width / 2) - (2 * text_size), wall - text_depth])
+        translate([outer_length / 2, (outer_width / 2) - (1 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("5.0V -> VCC: 5.0V; RX, TX: 5.0V", size = text_size, halign = "center", valign = "center");
+                text("VCC: 5.0V; RX, TX: 5.0V", size = text_size, halign = "center", valign = "center");
 
-        translate([outer_length / 2, (outer_width / 2) - (6 * text_size), wall - text_depth])
+        translate([outer_length / 2, (outer_width / 2) - (5 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("shell ver. 0.1", size = text_size, halign = "center", valign = "center");
+                text("shell ver. 0.2", size = text_size, halign = "center", valign = "center");
     }
 }
 
