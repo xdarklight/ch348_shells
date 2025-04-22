@@ -115,43 +115,43 @@ module shell() {
         translate([wall + text_size, inner_width / 2, outer_height - wall + text_depth])
             rotate([0,0,90])
             linear_extrude(text_depth)
-                text(".CON: .VRTG", size = text_size, halign = "center", valign = "center");
+                text("CON: _VRTG", size = text_size, halign = "center", valign = "center");
 
         translate([wall + (15 * 1), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text(".A", size = text_size, halign = "right", valign = "center");
+                text("_A", size = text_size, halign = "right", valign = "center");
 
         translate([wall + (15 * 2), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text(".B", size = text_size, halign = "right", valign = "center");
+                text("_B", size = text_size, halign = "right", valign = "center");
 
         translate([wall + (15 * 3), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text(".C", size = text_size, halign = "right", valign = "center");
+                text("_C", size = text_size, halign = "right", valign = "center");
 
         translate([wall + (15 * 4), wall + text_size, outer_height - wall + text_depth])
             linear_extrude(text_depth)
-                text(".D", size = text_size, halign = "right", valign = "center");
+                text("_D", size = text_size, halign = "right", valign = "center");
 
         translate([wall + (15 * 4), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text(".E", size = text_size, halign = "left", valign = "center");
+                text("_E", size = text_size, halign = "left", valign = "center");
 
         translate([wall + (15 * 3), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text(".F", size = text_size, halign = "left", valign = "center");
+                text("_F", size = text_size, halign = "left", valign = "center");
 
         translate([wall + (15 * 2), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text(".G", size = text_size, halign = "left", valign = "center");
+                text("_G", size = text_size, halign = "left", valign = "center");
 
         translate([wall + (15 * 1), outer_width - wall - text_size, outer_height - wall + text_depth])
             rotate([180,180,0])
             linear_extrude(text_depth)
-                text(".H", size = text_size, halign = "left", valign = "center");
+                text("_H", size = text_size, halign = "left", valign = "center");
 
         // USB-C cutout extending to floor
         translate([0, outer_width / 2 - usb_c_cutout_width / 2, 0])
