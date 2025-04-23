@@ -13,6 +13,8 @@ Markings on the bottom of the board:
 - `250312_0075`
 - QR code that reads: `XB_250312_0075`
 
+It uses 4-pin JST XH connectors with 2.54mm pitch.
+
 `v0.2` has gone productive for me, with the following caveats:
 - text is hard to read
 - dots (for the direction markers) had to be added manually in post
