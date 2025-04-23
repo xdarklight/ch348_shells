@@ -37,6 +37,9 @@ outer_length = inner_length + 2*wall;
 outer_width  = inner_width  + 2*wall;
 outer_height = inner_height + wall*2;
 
+// Push the PCB up so the connectors fit perfectly from the outside through the existing cutouts
+floor_inner_raised_height = 1;
+
 // Calculate USB cutout Y-range
 usb_c_y_min = (outer_width / 2) - (usb_c_cutout_width / 2);
 usb_c_y_max = (outer_width / 2) + (usb_c_cutout_width / 2);
@@ -176,7 +179,7 @@ module shell() {
 }
 
 // FLOOR (bottom plate with slots and USB cutout)
-module floor() {
+module floor_baseplate() {
     difference() {
         cube([outer_length, outer_width, wall]);
 
@@ -198,15 +201,27 @@ module floor() {
 
         translate([outer_length / 2, (outer_width / 2) + (1 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("VCC: 3.3V; RX, TX: 3.3V", size = text_size, halign = "center", valign = "center");
+                text("VCC: 3.3V RX/TX: 3.3V", size = text_size, halign = "center", valign = "center");
 
         translate([outer_length / 2, (outer_width / 2) - (1 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("VCC: 5.0V; RX, TX: 5.0V", size = text_size, halign = "center", valign = "center");
+                text("VCC: 5.0V RX/TX: 5.0V", size = text_size, halign = "center", valign = "center");
 
         translate([outer_length / 2, (outer_width / 2) - (5 * text_size), wall - text_depth])
             linear_extrude(text_depth)
-                text("shell ver. 0.2", size = text_size, halign = "center", valign = "center");
+                text("SHELL VER. 0.3", size = text_size, halign = "center", valign = "center");
+    }
+}
+
+module floor_raised_area() {
+    translate([wall + clearance, wall + clearance, -floor_inner_raised_height])
+        cube([outer_length - (2 * (wall + clearance)), outer_width - (2 * (wall + clearance)), floor_inner_raised_height]);
+}
+
+module floor() {
+    union() {
+        floor_baseplate();
+        floor_raised_area();
     }
 }
 
@@ -214,4 +229,3 @@ module floor() {
 shell();
 translate([0, outer_width + wall, outer_height - wall]) // translate([0, 0, -wall - 2])
     floor();
-
