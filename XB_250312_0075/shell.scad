@@ -32,7 +32,7 @@ usb_c_cutout_height = usb_c_height + 2*usb_c_margin_h;
 // Enclosure dimensions
 inner_length = pcb_length + 2*clearance;
 inner_width  = pcb_width  + 2*clearance;
-inner_height = (pcb_height - wall - 1) + serial_height + clearance;
+inner_height = (pcb_height - wall) + serial_height + clearance;
 outer_length = inner_length + 2*wall;
 outer_width  = inner_width  + 2*wall;
 outer_height = inner_height + wall*2;
